@@ -1,7 +1,7 @@
 #
 # Standalone manifest - for dev Vagrant box.
 #
-node "vagrant-ubuntu-precise-64" {
+node precise64 {
 
   include common
   include vagrant

@@ -1,4 +1,4 @@
-class redis {
+class openresty {
 
   $version = '2.4.15'
   $download = "http://agentzh.org/misc/nginx/ngx_openresty-${version}.tar.gz"
@@ -23,7 +23,14 @@ class redis {
     command => "./configure --with-luajit && /usr/bin/make && /usr/bin/make install PREFIX=${dest}",
     cwd     => "/tmp/ngx_openresty-${version}",
     creates => "/usr/local/openresty",
-    require => Exec[extract-openresty],
+    require => [
+      Exec[extract-openresty],
+      Package['libncurses'],
+      Package['libpcre'],
+      Package['libreadline'],
+      Package['libssl'],
+      Package['perl'],
+    ],
   }
 
 }

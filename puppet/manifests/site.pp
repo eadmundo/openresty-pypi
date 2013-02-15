@@ -15,5 +15,6 @@ class common {
     include libreadline
     include libssl
     include perl
+    include openresty
 
 }
