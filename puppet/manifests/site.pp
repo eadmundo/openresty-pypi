@@ -6,15 +6,19 @@ import 'nodes/*.pp'
 #
 class common {
 
-    #include python
-    #include fabric
-    #include git
-    #include curl
+    include python
+    include hotworker
+    include git
+    include fabric
+    include curl
     include libncurses
     include libpcre
     include libreadline
     include libssl
     include perl
     include openresty
+    include circus
+    include redis
+    include requests
 
 }

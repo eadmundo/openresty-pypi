@@ -1,6 +1,6 @@
 class openresty {
 
-  $version = '2.4.15'
+  $version = '1.2.4.14'
   $download = "http://agentzh.org/misc/nginx/ngx_openresty-${version}.tar.gz"
   $dest = "/opt/ngx_openresty-${version}"
   $bin = '/usr/local/bin'
@@ -20,15 +20,16 @@ class openresty {
   }
 
   exec { "make-openresty":
-    command => "./configure --with-luajit && /usr/bin/make && /usr/bin/make install PREFIX=${dest}",
+    command => "/tmp/ngx_openresty-${version}/configure --with-luajit && /usr/bin/make && /usr/bin/make install PREFIX=${dest}",
     cwd     => "/tmp/ngx_openresty-${version}",
     creates => "/usr/local/openresty",
+    #path    => "/tmp/ngx_openresty-${version}",
     require => [
       Exec[extract-openresty],
-      Package['libncurses'],
-      Package['libpcre'],
-      Package['libreadline'],
-      Package['libssl'],
+      Class['libncurses'],
+      Package['libpcre3-dev'],
+      Package['libreadline-dev'],
+      Package['libssl-dev'],
       Package['perl'],
     ],
   }

@@ -20,7 +20,7 @@ Vagrant::Config.run do |config|
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
-  config.vm.network :hostonly, "173.16.1.3"
+  config.vm.network :hostonly, "173.16.1.2"
 
   # Assign this VM to a bridged network, allowing you to connect directly to a
   # network using the host's network device. This makes the VM appear as another
@@ -29,7 +29,7 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port 8080, 8081
+  config.vm.forward_port 8080, 8080
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
