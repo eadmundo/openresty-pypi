@@ -3,7 +3,7 @@ import requests
 from hotworker import HotWorkerBase
 from hotqueue import HotQueue
 
-THIS_DIR = os.path.dirname(os.path.realpath(__file__))
+BASE_DIR = '/var/www'
 
 
 class CheeseShopWorker(HotWorkerBase):
@@ -22,7 +22,7 @@ class CheeseShopWorker(HotWorkerBase):
 
     def local_file_path(self, package, version, ext='tar.gz'):
         return os.path.join(
-            THIS_DIR, 'www', self.base_path.replace('/', ''),
+            BASE_DIR, self.base_path.replace('/', ''),
             package, '{}-{}.{}'.format(package, version, ext)
         )
 
