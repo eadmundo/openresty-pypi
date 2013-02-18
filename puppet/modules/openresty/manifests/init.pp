@@ -34,7 +34,7 @@ class openresty {
     ],
   }
 
-  file { '/var/www':
+  file { ['/var/www', '/var/www/simple']:
     ensure => directory
   }
 

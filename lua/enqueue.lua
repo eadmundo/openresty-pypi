@@ -7,10 +7,16 @@ if not ok then
     return
 end
 
-ok, err = red:rpush("hotqueue:cheeseshop", ngx.var.request_uri)
-if not ok then
-    ngx.say("failed to append to list: ", err)
-    return
+function string.starts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
+
+if string.starts(ngx.var.request_uri, '/simple') then
+    ok, err = red:rpush("hotqueue:cheeseshop", ngx.var.request_uri)
+    if not ok then
+        ngx.say("failed to append to list: ", err)
+        return
+    end
 end
 
 ngx.exit(ngx.HTTP_NOT_FOUND)

@@ -2,6 +2,7 @@ import os
 import requests
 from hotworker import HotWorkerBase
 from hotqueue import HotQueue
+import sys
 
 BASE_DIR = '/var/www'
 
@@ -45,7 +46,7 @@ class CheeseShopWorker(HotWorkerBase):
         return False
 
     def get_package_name_and_version(self, path):
-        parts = path.split('/')
+        parts = path.strip('/').split('/')
         if len(parts) == 1:
             return (parts[0], None)
         return (parts[0], parts[-1])
@@ -96,7 +97,7 @@ class CheeseShopWorker(HotWorkerBase):
         r = requests.get(download_url)
         if r.status_code == 200:
             path = os.path.join(
-                THIS_DIR, 'www', self.base_path.replace('/', ''),
+                BASE_DIR, self.base_path.replace('/', ''),
                 package, os.path.basename(download_url)
             )
             dirs_path = os.path.dirname(path)
