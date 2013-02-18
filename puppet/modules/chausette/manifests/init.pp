@@ -1,8 +1,8 @@
-class requests {
+class chaussette {
 
-  package { 'requests':
+  package { 'chaussette':
     provider => 'pip',
-    ensure   => '1.1',
+    ensure   => '0.7',
     requires => Package['python-dev'],
   }
 

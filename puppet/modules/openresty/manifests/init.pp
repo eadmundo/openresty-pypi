@@ -34,4 +34,29 @@ class openresty {
     ],
   }
 
+  file { '/var/www':
+    ensure => directory
+  }
+
+  file { '/usr/local/openresty/nginx/conf/nginx.conf':
+    ensure  => present,
+    content => template("openresty/nginx.conf"),
+    require => Exec[make-openresty],
+  }
+
+  file { '/etc/init/nginx.conf':
+    ensure => present,
+    content => template("openresty/nginx-upstart.conf"),
+  }
+
+  service { 'nginx':
+    ensure   => running,
+    enable   => true,
+    provider => upstart,
+    require => [
+      File['/etc/init/nginx.conf'],
+      File['/usr/local/openresty/nginx/conf/nginx.conf'],
+    ]
+  }
+
 }

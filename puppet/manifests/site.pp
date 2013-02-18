@@ -20,5 +20,7 @@ class common {
     include circus
     include redis
     include requests
+    include flask
+    include chaussette
 
 }

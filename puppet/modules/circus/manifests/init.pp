@@ -3,6 +3,7 @@ class circus {
   package { 'circus':
     provider => 'pip',
     ensure   => '0.6.0',
+    requires => Package['python-dev'],
   }
 
   file { "/etc/circus.ini":

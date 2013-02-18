@@ -13,4 +13,4 @@ if not ok then
     return
 end
 
-ngx.status = ngx.HTTP_NOT_FOUND
+ngx.exit(ngx.HTTP_NOT_FOUND)
