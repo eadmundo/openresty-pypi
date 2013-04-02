@@ -8,3 +8,9 @@ node precise64 {
   include vagrant::puppet
 
 }
+
+node 'openresty-pypi' {
+
+  include common
+
+}
