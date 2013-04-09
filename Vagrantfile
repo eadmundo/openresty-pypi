@@ -1,23 +1,34 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$script = <<SCRIPT
+apt-get update
+echo 'openresty-pypi.vagrant' | tee /etc/hostname
+hostname $(cat /etc/hostname)
+apt-get install -y puppet
+SCRIPT
+
 Vagrant.configure("2") do |config|
 
   config.vm.box = "precise64"
 
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  # Update apt
-  config.vm.provision :shell, :inline => "aptitude -q2 update"
-
-  # make sure puppet is installed
-  config.vm.provision :shell, :inline => "apt-get install -y puppet"
+  # bootstrap
+  config.vm.provision :shell, :inline => $script
 
   # Puppet bootstrap - update apt cache
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "bootstrap/apt-update.pp"
+  end
+
+  # Puppet bootstrap - build essentials
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.module_path = "puppet/modules"
+    puppet.manifest_file  = "bootstrap/build-essentials.pp"
   end
 
   config.vm.define :deploy do |deploy_config|

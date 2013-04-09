@@ -9,7 +9,7 @@ node precise64 {
 
 }
 
-node 'openresty-pypi' {
+node 'openresty-pypi.vagrant' {
 
   include common
 

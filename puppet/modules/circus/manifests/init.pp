@@ -3,7 +3,7 @@ class circus {
   package { 'circus':
     provider => 'pip',
     ensure   => '0.6.0',
-    require => Package['python-dev'],
+    require => [Package['python-dev'], Package['libzmq-dev']],
   }
 
   file { "/etc/circus.ini":

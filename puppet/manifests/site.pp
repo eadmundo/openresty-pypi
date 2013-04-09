@@ -22,5 +22,6 @@ class common {
     include requests
     include flask
     include chaussette
+    include zeromq
 
 }
